@@ -34,7 +34,7 @@ The CX Reply Assistant empowers agents by surfacing relevant company policies in
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/YahyaYusufShaikh/Customer-Experience-Assistant
    cd rag_project
    ```
 
