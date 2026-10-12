@@ -1,7 +1,8 @@
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { prisma } from "../lib/prisma";
-import dotenv from "dotenv";
+
+// import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 
@@ -13,8 +14,30 @@ const embeddings = new OpenAIEmbeddings({
   },
 });
 
+
+async function seedBrands() {
+  const brands = [
+    { id: "BRAND_ID_TECHGADGETS", name: "TechGadgets" },
+    { id: "BRAND_ID_FASHIONFLOW", name: "FashionFlow" },
+    { id: "BRAND_ID_HOMECOMFORT", name: "HomeComfort" },
+    { id: "BRAND_ID_GOURMETGRUB", name: "GourmetGrub" },
+  ];
+
+  for (const brand of brands) {
+    await prisma.brand.upsert({
+      where: { id: brand.id },
+      update: {},
+      create: {
+        id: brand.id,
+        name: brand.name,
+      },
+    });
+    console.log(`Ensured brand exists: ${brand.name}`);
+  }
+}
+
 async function seedBrand(brandId: string, filePath: string) {
-  const content = fs.readFileSync(path.join(process.cwd(), "rag_assistant", filePath), "utf-8");
+  const content = fs.readFileSync(path.join(process.cwd(), filePath), "utf-8");
 
   const splitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, chunkOverlap: 200 });
   const chunks = await splitter.splitText(content);
@@ -33,6 +56,7 @@ async function seedBrand(brandId: string, filePath: string) {
 
 // TODO: Replace these IDs with the actual IDs from your Supabase Brand table!
 async function main() {
+  await seedBrands();
   await seedBrand("BRAND_ID_TECHGADGETS", "data/brand_a.txt");
   await seedBrand("BRAND_ID_FASHIONFLOW", "data/brand_b.txt");
   await seedBrand("BRAND_ID_HOMECOMFORT", "data/brand_c.txt");

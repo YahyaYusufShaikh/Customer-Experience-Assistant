@@ -12,7 +12,7 @@ import { useState } from "react";
       setLoading(true);
       // Hardcoding a demo Brand ID.
       // In a real app, you'd fetch all brands from the DB first.
-      await ingestPolicy('123', content);
+      // await ingestPolicy('123', content);
       setLoading(false);
       alert('Policy embedded and saved!');
     };
