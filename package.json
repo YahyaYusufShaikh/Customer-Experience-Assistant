@@ -9,7 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@langchain/community": "^1.1.29",
+    "@langchain/openai": "^1.6.2",
     "@prisma/client": "^7.10.0",
+    "langchain": "^1.5.16",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
