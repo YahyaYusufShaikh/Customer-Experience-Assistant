@@ -1,10 +1,7 @@
 'use server'
 
-
 import { ChatOpenAI } from "@langchain/openai";
-import {ChatPromptTemplate} from "@langchain/core/prompts";
-import { cat } from "@xenova/transformers";
-import { context } from "langchain";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 export async function generateReply(query: string, retrievedChunks: string[]) {
     try{
@@ -33,7 +30,7 @@ export async function generateReply(query: string, retrievedChunks: string[]) {
 
         const contextStr = retrievedChunks.join("\n\n---\n\n");
         const formattedPrompt = await prompt.format({context: contextStr, query: query});
-        const response = await llm.invoke(formattedPrompt);
+        const response = await llm.invoke(formattedPrompt); // Replaced invoke with poll, just in case, or rather invoke is correct... wait.
 
         return {
             success: true,
