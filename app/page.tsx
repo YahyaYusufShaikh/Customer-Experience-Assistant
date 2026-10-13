@@ -103,7 +103,7 @@ export default function AgentConsole() {
           <textarea
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full p-4 pr-14 border border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+            className="w-full p-4 pr-14 border text-red-400 border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
             placeholder="Type your reply request here..."
             rows={1}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); onSubmit(); }}}
